@@ -93,29 +93,61 @@ print(sjs)
 print(sjs[0])
 
 
+# 참석자 명단 선언 (21 - 70p)
+attendlist = ['이순철', '김병헌', '김민우', '박찬호', '김민태']
+
+# 참석자 수 확인 : len   - 리스트 아이템개수 확인
+len(attendlist)
+
+# 문자열에 len 함수 적용시 문자열의 길이 출력(공백포함)
+str = 'Hello, World!!'
+print(len(str))
+
+# 사용자로부터 데이터 입력받기 : input
+name = input('이름을 입력하세요: ')
+
+# 사용자에게 정수 2개를 입력받아 더한 후 출력
+# input으로 입력받은 내용은 무조건 문자로 처리
+# 만약, 숫자를 입력받길 원한다면, 자료형 변환
+num1 = int(input('첫번째 정수: '))
+num2 = int(input('두번째 정수: '))
+print(num1, num2, num1 + num2)
+
+# 65p
+userName = ''
+userAge = ''
+userName = input('이름을 입력하세요. ')
+print('사용자 이름')
+print(userName)
+userAge = input('나이를 입력하세요. ')
+print('사용자 나이')
+print(userAge)
+
+# 날씨 예보 프로그램 (21 - 68p)
+date = input('날짜: n월 n일')          # <형식지정?
+day =  input('요일: ')                # <날짜요일 자동 연동
+mtemp = input('아침 기온: ')
+ntemp = input('낮 기온: ')
+rain = input('비올 확률: ')
+air = input('미세먼지: ')
+rsun = input('일출시간: ')
+dsun = input('일몰시간: ')
+swave = input('남해 : ')
+ewave = input('동해: ')
+wwave = input('서해: ')
+
+weather = f'''
+내일 날씨 예보입니다.
+{day}요일인{date}의 아침 최저 기온은{mtemp}도, 낮 최고 기온은{ntemp}도로 예보됐습니다.
+'''
+
+print(weather)
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+# 입력 글자수 확인 프로그램  (20 - 76p)
+# 메세지 입력받아 메세지의 문자길이 출력
+mes = input('메세지를 입력하세요')
+print(f'글자수: {len(mes)}')
 
 
 
