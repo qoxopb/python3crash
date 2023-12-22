@@ -31,6 +31,13 @@ engs.append(eng)
 maths.append(math)
 
 
+for i in range(3):
+print(f'{i+1}번째 학생데이터 입력')
+        names.append(input('이름: '))
+        kors.append(int(input('국어: ')))
+        engs.append(int(input('영어: ')))
+        maths.append(int(input('수학: ')))
+
 
 
 # 성적처리
