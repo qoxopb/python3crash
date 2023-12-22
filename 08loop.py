@@ -119,6 +119,178 @@ for menu in menus:
 
 
 
+# pass 키워드
+# 반복문 사용시 코드만 작성해 놓고
+# 실행문은 나중에 추가하고 싶을 경우
+# pass 키워드 사용
+for i in range(1,100):
+    pass                     # 반복할 내용은 나중에 작성
+
+
+# 반복 수행시 이터러블 객체가 필요없는 경우
+# 변수명 대신 _ 사용하기도 함
+for _ in range(10):
+    print('Hello, World!')
+
+
+
+
+# 중첩반복문
+# 두 개이상의 반복문을 이용해서 반복실행을 할수도 있음
+# 보통 2개의 반복문을 중첩해서 사용하는 경우가 많음
+# 이 경우 바깥쪽 반복문은 행을,
+# 안쪽 반복문은 열을 반복하는데 사용함
+# 총 반복횟수는 (바깥쪽 반복문 횟수) * (안쪽 반복문 횟수)임
+
+    # *
+    # **
+    # ***
+    # ****
+    # ***** 모양 출력하기
+
+for i in range(1,5+1):             # 행
+    for j in range(1,5+1):         # 열
+        print('*', end='')
+    print()                        #줄바꿈 (새로운 행 만듦)
+##안쪽 행(* 5개) 만족 시 줄바꿈 후 다른행 실행
+
+
+
+
+
+
+# 2단부터 9단까지의 구구단을 출력하는
+# 중첩반복문 작성
+    for i in range(2, 9+1):
+        for j in range(1, 9+1):
+            # 아래로 끝없이 출력
+            print(f'{i} x {j} = {i * j}')
+        print()
+
+    for i in range(2, 9+1):
+        for j in range(1, 9+1):
+            # 줄바꿈 없이 출력하되
+            #9개의 단을 출력하고 줄바꿈 추가
+            print(f'{i} x {j} = {i * j}', end=' ')
+        print()
+
+    for i in range(2, 9+1):
+        for j in range(1, 9+1):
+            # 단 세로출력이 아닌 가로출력으로
+            # 균일한 출력을 위해 숫자 자릿수 맞추기 - 자릿수 지정(숫자 오른쪽정렬 문자 왼쪽정렬)
+            print(f'{j} x {i} = {i * j:2d}', end='   ')
+        print()
+
+
+
+    for i in range(2, 9 + 1):
+        #2단부터 5단까지 ,6단부터 9단까지
+        for j in range(2, 5+ 1):
+            print(f'{j} x {i} = {i * j:2d}', end='   ')
+        print()
+
+    for i in range(1, 9 + 1):
+        #2단부터 5단까지 ,6단부터 9단까지
+        for j in range(6, 9+ 1):
+            print(f'{j} x {i} = {i * j:2d}', end='   ')
+        print()
+
+
+
+
+
+
+# employees.csv를 이용해서 사원정보를 입력하면
+# list에 각각 저장하는 코드를 작성하세요
+# 사번empno, 이름fname, 성lname, 이메일email,
+# 입사일hdate, 직책jobid, 급여sal, 부서번호deptid
+
+    empnos = []
+    fnames = []
+    lnames = []
+    emails = []
+    hdates = []
+    jobids = []
+    sals = []
+    deptids = []
+
+# 데이터 작업 (list append와 분리 권장)
+empno = input('사번: ')
+fname = input('이름: ')
+lname = input('성: ')
+email = input('메일: ')
+hdate = input('입사일: ')
+jobid = input('직책: ')
+sal = input('급여: ')
+deptid = input('부서번호: ')
+
+empnos.append(empno)
+fnames.append(fname)
+lnames.append(lname)
+emails.append(email)
+hdates.append(hdate)
+jobids.append(jobid)
+sals.append(sal)
+deptids.append(deptid)
+
+for i in range(len(empnos)):
+    print(f'{empnos[i]} {fnames[i]} {lnames[i]} '
+          f'{emails[i]} {hdates[i]} {jobids[i]} '
+            f'{sals[i]} {deptids[i]}')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
