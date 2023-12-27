@@ -66,6 +66,7 @@ print(a)
 b.extend(c)
 print(b)
 
+
 # 리스트의 모든 요소 존재 파악:  in/not in 연산자
 todo = ['cleaning', 'shopping', 'study', 'exercise', 'game']
 
