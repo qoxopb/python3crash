@@ -1,6 +1,9 @@
 import sys
 emps = []
 
+def load_employees():
+    print('프로그램을 초기화합니다')
+    print('초기화 완료')
 
 def show_menu():
     main_menu = '''
@@ -20,23 +23,31 @@ def show_menu():
     return menu
 
 
-def load_employees():
-    print('프로그램을 초기화합니다')
-    print('초기화 완료')
+def input_employee():
+    emp = {}
+    emp['empno'] = input('사번: ')
+    emp['fname'] = input('이름: ')
+    emp['lname'] = input('성: ')
+    emp['email'] = input('이메일: ')
+    emp['hdate'] = int(input('입사일: '))
+    emp['jobid'] = input('직책: ')
+    emp['sal'] = int(input('급여: '))
+    emp['deptid'] = int(input('부서번호: '))
+    return emp
+
+
+def save_employee(emp):
+    row = (f"{emp['empno']}, {emp['fname']}, {emp['lname']}, {emp['email']}, "
+           f"{emp['hdate']}, {emp['jobid']}, {emp['sal']}, {emp['deptid']}\n")
+    with open('employees.csv', 'a') as f:
+        f.write(row)
 
 
 def add_employee():   #데이터 입력받음
     print('사원정보를 등록합니다')
-    em = {}
-    em['employee_id'] = int(input('사번: '))
-    em['first_name'] = input('성: ')
-    em['last_name'] = input('이름: ')
-    em['email'] = input('이메일: ')
-    em['hire_date'] = int(input('입사일: '))
-    em['job_id'] = input('직책: ')
-    em['salary'] = int(input('급여: '))
-    em['dapartment_id'] = int(input('부서번호: '))
-    return em
+    emp = input_employee()
+    save_employee(emp)
+
 
 
 def read_employee():
