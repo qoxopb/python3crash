@@ -10,8 +10,7 @@ import sys
 import varies8.sjv5b as sjv5
 
 #입력 데이터 선언
-sungjuks = {'response': {'body': {'totalCount': 999, 'items': []}}}
-
+sungjuks = ''
 
 # 함수 정의
 def show_menu(): # 메뉴 출력
