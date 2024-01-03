@@ -1,9 +1,27 @@
 import sys
 emps = []
 
+
 def load_employees():
     print('프로그램을 초기화합니다')
-    print('초기화 완료')
+    global emps
+    dicts = []
+
+    with open('employees.csv') as f:
+        datas = f.readlines()
+
+    for data in datas:
+        item = data.strip().split(',')
+        d = {'empno':item[0], 'fname':item[1], 'lname':item[2], 'email':item[3], 'hdate':item[4],
+            'jobid':item[5], 'sal':item[6], 'deptid':item[7]}
+        dicts.append(d)
+
+    emps = dicts
+print('초기화 완료')
+
+
+
+
 
 def show_menu():
     main_menu = '''
@@ -41,6 +59,7 @@ def save_employee(emp):
            f"{emp['hdate']}, {emp['jobid']}, {emp['sal']}, {emp['deptid']}\n")
     with open('employees.csv', 'a') as f:
         f.write(row)
+    emps.append(emp)
 
 
 def add_employee():   #데이터 입력받음
@@ -52,6 +71,11 @@ def add_employee():   #데이터 입력받음
 
 def read_employee():
     print('모든 사원정보를 조회합니다')
+    result = ''
+    for emp in emps:
+        result += (f"{emp['empno']}\t{emp['fname']}\t{emp['jobid']}\t{emp['deptid']}\n")
+    print(result)
+
 
 
 def readone_employee():
