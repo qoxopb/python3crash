@@ -2,8 +2,10 @@ import json
 import sys
 from collections import OrderedDict
 # sungjuks = {'response': {'body': {'totalCount': 999, 'items': []}}}
-sjs = {'response': {'body': {'totalCount': 0, 'items': []}}}
 
+sjs = {}
+items = []
+totalCount = 0
 
 
 # 함수 정의
@@ -25,11 +27,14 @@ def show_menu(): # 메뉴 출력
     return menu
 
 def read_sungjuk():   #성적데이터 입력받음
+    sungjuk = input('이름과 성적을 입력하세요 (예: 홍길동 99 98 99) :')
+    data = sungjuk.split()                 #구분자 공백일때는 () 사용가능
+
     sj = OrderedDict()
-    sj['name'] = input('이름: ')
-    sj['kor'] = int(input('국어: '))
-    sj['eng'] = int(input('영어: '))
-    sj['mat'] = int(input('수학: '))
+    sj['name'] = data[0]
+    sj['kor'] = int(data[1])
+    sj['eng'] = int(data[2])
+    sj['mat'] = int(data[3])
     return sj
 
 def compute_sungjuk(sj):   #성적처리
@@ -44,14 +49,16 @@ def compute_sungjuk(sj):   #성적처리
 
 def show_sungjuk():    #성적 데이터 출력
     print('성적데이터 조회')
-    for sj in sjs['response']['body']['items']:
+    for sj in items:
         print(f"이름: {sj['name']:s}, 국어: {sj['kor']}, "
               f"영어: {sj['eng']}, 수학: {sj['mat']}")
 
 
 def save_sungjuk(sj):
+    global sjs
+
     # 메모리 내에 생성된 json객체에 방금 생성한 성적데이터 저장
-    sjs['response']['body']['items'].append(sj)
+    items.append(sj)
     sjs['response']['body']['totalCount'] += 1
     # 메모리 내에 생성된 json객체의 모든 내용을 파일에 새롭게 저장
     with open('sungjuks.json', 'w', encoding='utf-8')as f:
@@ -71,16 +78,31 @@ def addsungjuk():
 # 프로그램 시작시 sungjuks.json 파일을 읽어 sjs변수에 초기화
 def load_sungjuk():
     global sjs
+    global items
+    global totalCount
     try:                    # 만일 작업중 오류가 발생하면
         with open('sungjuks.json', encoding='UTF-8')as f:
             sjs = json.load(f)
+            items = sjs['response']['body']['items']
+            totalCount = sjs['response']['body']['totalCount']
     except:
-        pass                # 프로그램 실행 중단없이 다음코드 실행
-
+         # 프로그램 실행 중단없이 다음코드 실행
+        items = sjs['response']['body']['items']
+        totalCount = sjs['response']['body']['totalCount']
 
 
 def showone_sungjuk():
-    return None
+    name = input('상세 조회할 학생이름은?')
+
+    info = '찾는 데이터가 없어요!!'
+    for sj in items:
+        if sj['name'] == name:
+            info = f"{sj['name']} {sj['kor']} {sj['eng']} {sj['mat']} " \
+                   f"{sj['tot']} {sj['avg']} {sj['grd']}"
+            break  # 찾고나면 검색 작업 중단
+
+    print(info)
+
 
 
 def modify_sungjuk():
