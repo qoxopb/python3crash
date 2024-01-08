@@ -9,22 +9,31 @@
 # For Instant Client 21 install VS 2019 or later.
 # For Instant Client 19 install VS 2017.
 # https://oracle.com/kr/database/technologies/instant-client/winx64-64-downloads.html
-
 # inteliJ에서 csv 파일 가져오기 시 (오라클)
 # 텍스트 컬럼은 자동으로  CLOB 타입으로 설정
 # CLOB가 꼭 필요한 컬럼 외 나머지는 VARCHAR타입으로 변경해 사용
 
 
-import cx_Oracle
+# 2024-01-08 기준
+# cx_Oracle 모듈이 oracledb로 업그레이드됨
+# oracle instant client 없이 데이터베이스 관련 작업 가능
+# pip install oracledb (터미널)
+# https://cx-oracle.readthedocs.io/en/latest/user_guide/installation.html
 
-host = ''
-userid = ''
-passwd = ''
-sid = ''
+import cx_Oracle
+import oracledb
+
+host = '3.35.54.151'
+userid = 'bigdata'
+passwd = 'bigdata'    #bigdata2023
+sid = 'FREE'
+
 
 # 디비 서버에 연결
-dsn_tns = cx_Oracle.makedsn(host, 1521, sid)
-conn = cx_Oracle.connect(userid, passwd, dsn_tns)
+# dsn_tns = cx_Oracle.makedsn(host, 1521, sid)
+# conn = cx_Oracle.connect(userid, passwd, dsn_tns)
+dsn_tns = oracledb.makedsn(host, 1521, sid)
+conn = oracledb.connect(user=userid, password=passwd, dsn=dsn_tns)
 
 cursor = conn.cursor()
 
@@ -41,8 +50,8 @@ conn.close()
 
 
 # 국가별 메달별 획득수 조회
-dsn_tns = cx_Oracle.makedsn(host, 1521, sid)
-conn = cx_Oracle.connect(userid, passwd, dsn_tns)
+dsn_tns = oracledb.makedsn(host, 1521, sid)
+conn = oracledb.connect(user=userid, password=passwd, dsn=dsn_tns)
 cursor = conn.cursor()
 # CLOB 컬럼을 select에 사용 시 to_char 함수 필요 (성능저하유발)
 # 전체타입 VARCHAR 로 변경해야함
@@ -62,8 +71,8 @@ conn.close()
 
 
 # 승선위치별(embarked) 성별(sex) 생존자 (survived) 수 조회
-dsn_tns = cx_Oracle.makedsn(host, 1521, sid)
-conn = cx_Oracle.connect(userid, passwd, dsn_tns)
+dsn_tns = oracledb.makedsn(host, 1521, sid)
+conn = oracledb.connect(user=userid, password=passwd, dsn=dsn_tns)
 cursor = conn.cursor()
 
 sql = ' select EMBARK_TOWN, SEX, count(ALIVE) alives from TITANIC2 '\
@@ -80,8 +89,8 @@ conn.close()
 
 
 # 승선위치별(embarked) 성별+연령별(who) 생존자 (survived) 수 조회
-dsn_tns = cx_Oracle.makedsn(host, 1521, sid)
-conn = cx_Oracle.connect(userid, passwd, dsn_tns)
+dsn_tns = oracledb.makedsn(host, 1521, sid)
+conn = oracledb.connect(user=userid, password=passwd, dsn=dsn_tns)
 cursor = conn.cursor()
 
 sql = ' select EMBARK_TOWN, WHO, count(WHO) alives from TITANIC2 '\
@@ -94,10 +103,6 @@ for embark, who, alives in cursor:
 
 cursor.close()
 conn.close()
-
-cursor.close()
-conn.close()
-
 
 
 
