@@ -2,7 +2,7 @@ from varies8.SungJuk import SungJuk
 
 
 
-class Sungukservice:
+class SungJukservice:
     @staticmethod
     def read_sungjuk():
         name = input('이름은 ?')
@@ -21,9 +21,6 @@ class Sungukservice:
         elif (sj.avg >= 80):         sj.grd = '우'
         elif (sj.avg >= 70):         sj.grd = '미'
         elif (sj.avg >= 60):         sj.grd = '양'
-
-
-
 
 
 
