@@ -83,14 +83,14 @@ def readone_book():
     도서데이터 상세조회
     :return: 없음
     """
-    bkno = input('상세 조회할 도서명 : ')
+    bkname = input('상세 조회할 도서명 : ')
 
-    row = BookDAO.selectone_book(bkno)
-
-    print(f'{row[0]} {row[1]} {row[2]} {row[3]} {row[4]} {row[5]} {row[6]} {row[7]} {row[8]}')
-
-    info = '찾는 데이터가 없습니다.'
-
+    row = BookDAO.selectone_book(bkname)
+    if row:
+        print(f'{row[0]} {row[1]} {row[2]} {row[3]} {row[4]} '
+              f'{row[5]:,} {row[6]:,} {row[7]}% {row[8]:,} {row[9]}')
+    else:
+        print('데이터가 없습니다.')
 
 
 
