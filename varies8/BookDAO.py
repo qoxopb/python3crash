@@ -11,7 +11,7 @@ updatesql =  'update book set bkname = %s, author = %s, publisher = %s,  '\
              ' pubdate = %s, retail = %s, pctoff = %s '\
              ' where bkno = %s '
 
-deletesql = ' delete book where bkno = %s '
+deletesql = 'delete from book where bkno = %s '
 
 
 class BookDAO:
@@ -57,7 +57,13 @@ class BookDAO:
 
 
     @staticmethod
-    def delelte_book(self):
-        pass
+    def delelte_book(bkno):
+        cursor, conn = dbinfo.openConn()
+        cursor.execute(deletesql, [bkno])
+        conn.commit()
+        rowcnt = cursor.rowcount
+
+        dbinfo.closeConn(cursor, conn)
+        return rowcnt
 
 

@@ -129,9 +129,9 @@ def remove_book():
     :return:
     """
     bkno = input('삭제할 도서 번호: ')
-    rowcnt = BookDAO.delete_book(bkno)
-    print(f'{rowcnt} 건의 데이터가 삭제되었습니다.')
 
+    rowcount = BookDAO.delete_book(bkno)
+    print(f'{rowcount}건의 도서데이터가 추가됨.')
 
 
 
