@@ -3,7 +3,7 @@ import varies8.dbinfo2 as dbinfo
 insertsql = ' insert into book (bkname, author, pubilisher, pubdate, retail, '\
              ' price, pctoff,mileage) values (%s,%s,%s,%s,%s,%s,%s,%s) '
 
-selectsql = ' select bkno, bkname, author, price from book '
+selectsql = ' select bkno, bkname, author, pubilisher, price from book '
 
 selectonesql = ' select * from book where bkno = %s '
 
@@ -30,8 +30,14 @@ class BookDAO:
 
 
     @staticmethod
-    def select_book(self):
-        pass
+    def select_book():
+        cursor, conn = dbinfo.openConn()
+
+        cursor.execute(selectsql)
+        rows = cursor.fetchall()
+
+        dbinfo.closeConn(cursor, conn)
+        return rows
 
 
     @staticmethod

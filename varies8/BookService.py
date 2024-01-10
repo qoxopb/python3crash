@@ -34,8 +34,8 @@ def input_book():
     author = input('저자 : ')
     pubilisher = input('출판사 : ')
     pubdate = input('출간일 : ')
-    retail = input('정가 : ')
-    pctoff = input('할인율 : ')
+    retail = int(input('정가 : '))
+    pctoff = int(input('할인율 : '))
 
     bk = Book(bkname, author, pubilisher, pubdate, retail, pctoff)
     bk.price = bk.retail * (1 - (bk.pctoff / 100))
@@ -51,6 +51,7 @@ def new_book():
     """
     print('도서데이터 추가')
     bk = input_book()
+    print(bk)
 
     rowcount = BookDAO.insert_book(bk)
     print(f'{rowcount}건의 도서데이터가 추가됨.')
@@ -66,9 +67,14 @@ def read_book():
     :return: 없음
     """
     print('도서데이터 조회')
+    result = ''
+
     rows = BookDAO.select_book()
     for row in rows:
-        print(f'{row[0]} {row[1][:10]} {row[2]} {row[3]} {str(row[4])}')
+        result += f'{row[0]} {row[1]} {row[2]} {row[3]} {row[4]:,}\n'
+
+    print(result)
+
 
 
 #도서 상세조회
