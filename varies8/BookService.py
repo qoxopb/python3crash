@@ -2,7 +2,11 @@ import sys
 from varies8.Book import Book
 from varies8.BookDAO import BookDAO
 
-
+# 클래스의 메서드 접근제한자
+# public    : 모든 클래스에서 접근가능
+# protected : 상속관계에 있는 클래스만 접근가능(파이썬 미지원)
+# default : 같은 패키지 내 클래스들끼리 접근가능(파이썬 미지원)
+# private : 메서드를 정의한 클래스만 접근 가능 (메서드에 __추가)
 
 class BookService:
     # 메뉴 출력
@@ -31,7 +35,7 @@ class BookService:
 
     # 도서 데이터 추가 (입력-처리-저장)
     @staticmethod
-    def input_book(self):
+    def __input_book(self):
         bkname = input('도서명 : ')
         author = input('저자 : ')
         pubilisher = input('출판사 : ')
@@ -52,7 +56,7 @@ class BookService:
         :return: 없음
         """
         print('도서데이터 추가')
-        bk = BookService.input_book()
+        bk = BookService.__input_book()
 
         rowcount = BookDAO.insert_book(bk)
         print(f'{rowcount}건의 도서데이터가 추가됨.')
