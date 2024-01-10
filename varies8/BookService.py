@@ -93,6 +93,24 @@ def readone_book():
         print('데이터가 없습니다.')
 
 
+# 도서 데이터 추가 (입력-처리-저장)
+def reinput_book(obk):
+    bkname = input(f'도서명 : {obk[1]}')
+    author = input(f'저자 : {obk[2]}')
+    pubilisher = input(f'출판사 : {obk[3]}')
+    pubdate = input(f'출간일 : {obk[4]}')
+    retail = int(input(f'정가 : {obk[5]}'))
+    pctoff = int(input(f'할인율 : {obk[7]}'))
+
+    bk = Book(bkname, author, pubilisher, pubdate, retail, pctoff)
+
+    bk.price = bk.retail * (1 - (bk.pctoff / 100))
+    bk.milege = bk.retail * (bk.pctoff / 100)
+    bk.bkno = obk[0]
+
+    return bk
+
+
 
 # 도서데이터 수정
 def modify_book():
@@ -100,25 +118,15 @@ def modify_book():
     도서데이터 수정
     :return:
     """
-    bkno = input('수정할 도서 번호: ')
+    bkname = input('수정할 도서명: ')
     # 튜플객체를 수정하기 위해 리스트객체로 변환
-    bk = list(BookDAO.selectone_book(bkno))
-
-    if bk[0]: # 만일, 수정데이터가 존재한다면
-        bk[1] = (input(f'새 이름: {bk[1]}) : '))
-        bk[2] = int(input(f'새 국어 점수: (기존점수:{bk[2]}) : '))
-        bk[3] = int(input(f'새 영어 점수: (기존점수:{bk[3]}) : '))
-        bk[4] = int(input(f'새 수학 점수: (기존점수:{bk[4]}) : '))
-        # 조회한 결과를 클래스 타입으로 변경 후 다시 도서처리
-        bk = Book(bk[1], bk[2], bk[3], bk[4])
-        BookService.compute_sunjuk(bk)
-
-        rowcnt = BookDAO.update_book(bk, bkno)
+    row = BookDAO.selectone_book(bkname)
+    if row:
+        bk = reinput_book(row)
+        rowcnt = BookDAO.update_book(bk)
         print(f'{rowcnt} 건의 데이터가 수정되었습니다.')
-
-
     else:
-        print('데이터가 존재하지 않습니다.')
+        print('수정할 데이터가 존재하지 않습니다.')
 
 
 

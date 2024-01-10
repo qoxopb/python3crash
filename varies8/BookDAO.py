@@ -7,9 +7,9 @@ selectsql = ' select bkno, bkname, author, pubilisher, price from book '
 
 selectonesql = ' select * from book where bkname = %s '
 
-updatesql =  'update book set bkname = %s, author = %s, publisher = %s,  '\
-             ' pubdate = %s, retail = %s, pctoff = %s '\
-             ' where bkno = %s '
+updatesql =  'update book set bkname=%s, author=%s, publisher=%s,  '\
+             ' pubdate=%s, retail=%s, price=%s, pctoff=%s, mileage=%s '\
+             ' regdate=current_timestamp where bkno =%s '
 
 deletesql = 'delete from book where bkno = %s '
 
@@ -40,6 +40,7 @@ class BookDAO:
         return rows
 
 
+
     @staticmethod
     def selectone_book(bkname):
         cursor, conn = dbinfo.openConn()
@@ -51,9 +52,19 @@ class BookDAO:
         return row
 
 
+
     @staticmethod
-    def update_book(self):
-        pass
+    def update_book(bk):
+        cursor, conn = dbinfo.openConn()
+
+        params = [bk.bkname, bk.author, bk.pubilisher, bk.pubdate,
+                  int(bk.retail), int(bk.price), int(bk.pctoff), int(bk.milege),
+                  bk.bkno]
+        cursor.execute(updatesql, params)
+        conn.commit()
+
+        dbinfo.closeConn(cursor, conn)
+        return rowcnt
 
 
     @staticmethod
