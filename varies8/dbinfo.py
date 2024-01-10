@@ -6,7 +6,7 @@ import os
 # 시스템 환경변수 등록
 # linux : export 키=값
 # window : set 키=값
-url = os.getenv('URL')
+url = os.getenv('HST')
 userid = os.getenv('USR')
 passwd = os.getenv('PWD')
 sid = os.getenv('SID')
